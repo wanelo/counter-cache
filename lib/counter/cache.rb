@@ -1,7 +1,7 @@
-require "counter/stall/version"
+require "counter/cache/version"
 
 module Counter
-  module Stall
+  module Cache
     # Your code goes here...
   end
 end

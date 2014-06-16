@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'counter/stall/version'
+require 'counter/cache/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "counter-stall"
-  spec.version       = Counter::Stall::VERSION
-  spec.authors       = ["James Hart & Matt Camuto"]
-  spec.email         = ["james+matt.camuto@wanelo.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.name          = "counter-cache"
+  spec.version       = Counter::Cache::VERSION
+  spec.authors       = ["Paul Henry & Matt Camuto"]
+  spec.email         = ["dev@wanelo.com"]
+  spec.summary       = %q{Counting is hard.}
+  spec.description   = %q{This makes it easier.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -20,4 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec", ">= 3.0"
+  spec.add_development_dependency "guard"
+  spec.add_development_dependency "guard-rspec"
 end
