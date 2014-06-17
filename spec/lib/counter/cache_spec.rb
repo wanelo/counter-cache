@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Counter::Cache do
+RSpec.describe Counter::Cache do
   describe '.included' do
     let(:counter) { double(:counter) }
     let(:clazz) { Class.new { include Counter::Cache } }

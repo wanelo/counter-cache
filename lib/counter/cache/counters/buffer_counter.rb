@@ -16,8 +16,8 @@ module Counter
           Updater.new(source_object, options, self.class.name).update!(direction)
         end
 
-        def save!
-          Saver.new(options).save!
+        def save!(&block)
+          Saver.new(options).save!(&block)
         end
       end
     end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Counter::Cache::OptionsParser do
+RSpec.describe Counter::Cache::OptionsParser do
 
   subject(:parser) { Counter::Cache::OptionsParser.new options }
   let(:options) { {} }
@@ -23,28 +23,6 @@ describe Counter::Cache::OptionsParser do
       let(:options) { { cache: true } }
       it "it should be false" do
         expect(parser.cached?).to eq(true)
-      end
-    end
-  end
-
-  describe "#recalculation?" do
-    describe "if cache is nil" do
-      it "it should be true" do
-        expect(parser.recalculation?).to eq(true)
-      end
-    end
-
-    describe "if cache is false" do
-      let(:options) { { recalculation: false } }
-      it "it should be false" do
-        expect(parser.recalculation?).to eq(false)
-      end
-    end
-
-    describe "if cache is true" do
-      let(:options) { { recalculation: true } }
-      it "it should be false" do
-        expect(parser.recalculation?).to eq(true)
       end
     end
   end
@@ -79,23 +57,24 @@ describe Counter::Cache::OptionsParser do
     end
   end
 
-  describe "#wait" do
-    let(:source_object) { double("src_obj") }
-
-    describe "with a value" do
-      let(:options) { { wait: 1234 } }
-
-      it "returns option if set" do
-        expect(parser.wait(source_object)).to eq(1234)
+  describe "#recalculation?" do
+    describe "if cache is nil" do
+      it "it should be true" do
+        expect(parser.recalculation?).to eq(true)
       end
     end
 
-    describe "with a proc" do
-      let(:wait_double) { double("callee", call: 123456) }
-      let(:options) { { wait: wait_double } }
+    describe "if cache is false" do
+      let(:options) { { recalculation: false } }
+      it "it should be false" do
+        expect(parser.recalculation?).to eq(false)
+      end
+    end
 
-      it "returns option if set" do
-        expect(parser.wait(source_object)).to eq(123456)
+    describe "if cache is true" do
+      let(:options) { { recalculation: true } }
+      it "it should be false" do
+        expect(parser.recalculation?).to eq(true)
       end
     end
   end
@@ -133,7 +112,7 @@ describe Counter::Cache::OptionsParser do
   end
 
   describe "#relation_id" do
-    let(:options) { { relation_id: 1 }}
+    let(:options) { { relation_id: 1 } }
 
     it "returns option if set" do
       expect(parser.relation_id).to eq(1)
@@ -146,6 +125,28 @@ describe Counter::Cache::OptionsParser do
       expect(parser.source_object_class_name).to eq("class_name")
     end
   end
+
+  describe "#wait" do
+    let(:source_object) { double("src_obj") }
+
+    describe "with a value" do
+      let(:options) { { wait: 1234 } }
+
+      it "returns option if set" do
+        expect(parser.wait(source_object)).to eq(1234)
+      end
+    end
+
+    describe "with a proc" do
+      let(:wait_double) { double("callee", call: 123456) }
+      let(:options) { { wait: wait_double } }
+
+      it "returns option if set" do
+        expect(parser.wait(source_object)).to eq(123456)
+      end
+    end
+  end
+
 
   describe "#worker" do
     describe "With a specified worker" do
@@ -170,4 +171,6 @@ describe Counter::Cache::OptionsParser do
       end
     end
   end
+
+
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Counter::Cache::Counters::BufferCounter::Enqueuer do
+RSpec.describe Counter::Cache::Counters::BufferCounter::Enqueuer do
   let(:worker_adapter) { double }
   let(:options) { double(worker_adapter: worker_adapter,
                          wait: 10,

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Counter::Cache::Redis do
+RSpec.describe Counter::Cache::Redis do
   let(:redis) { double }
   let(:redis_pool) { double }
 

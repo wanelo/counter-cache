@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Counter::Cache::Counters::BufferCounter::Key do
+RSpec.describe Counter::Cache::Counters::BufferCounter::Key do
   let(:options) { double(relation_class_name: "Boo", relation: "boo", column: "boos_count", relation_id: nil) }
   let(:source_object) { double(boo_id: 1) }
   let(:key) { Counter::Cache::Counters::BufferCounter::Key.new(source_object, options) }

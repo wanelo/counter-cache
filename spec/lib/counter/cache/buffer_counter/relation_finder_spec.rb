@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Counter::Cache::Counters::BufferCounter::RelationFinder do
+RSpec.describe Counter::Cache::Counters::BufferCounter::RelationFinder do
   let(:options) { double }
   let(:source_object) { double }
   let(:finder) { Counter::Cache::Counters::BufferCounter::RelationFinder.new(source_object, options) }
@@ -28,7 +28,7 @@ describe Counter::Cache::Counters::BufferCounter::RelationFinder do
 
       before do
         reflection = double
-        reflection.stub_chain(:class_name, :to_s, :camelize).and_return("Boo")
+        expect(reflection).to receive_message_chain("class_name.to_s.camelize") { "Boo" }
         expect(source_object).to receive(:reflections).and_return({:boo => reflection})
       end
 

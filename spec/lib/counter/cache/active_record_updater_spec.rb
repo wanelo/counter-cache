@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Counter::Cache::ActiveRecordUpdater do
+RSpec.describe Counter::Cache::ActiveRecordUpdater do
   let(:counter_class) { double }
   let(:counter) { double }
   let(:options) { { counter_class: counter_class } }

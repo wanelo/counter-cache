@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Counter::Cache::Counters::BufferCounter do
+RSpec.describe Counter::Cache::Counters::BufferCounter do
   let(:options) { {} }
   let(:source_object) { double }
   let(:counter) { Counter::Cache::Counters::BufferCounter.new(source_object, options) }
