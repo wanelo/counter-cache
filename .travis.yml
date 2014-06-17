@@ -4,6 +4,10 @@ rvm:
   - 2.1.0
   - 2.0.0
   - 1.9.3
+gemfile:
+  - gemfiles/activerecord_3.gemfile
+  - gemfiles/activerecord_4.0.gemfile
+  - gemfiles/activerecord_4.1.gemfile
 notifications:
   email:
     on_success: never

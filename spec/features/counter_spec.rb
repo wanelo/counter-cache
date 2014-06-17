@@ -6,7 +6,7 @@ require 'fakeredis'
 RSpec.describe "Counting" do
 
   before do
-    ActiveRecord::Base.silence { CreateModelsForTest.migrate(:up) }
+    CreateModelsForTest.migrate(:up)
     Counter::Cache.configure do |c|
       c.redis_pool = Redis.new
       c.default_worker_adapter = TestWorkerAdapter.new
@@ -14,7 +14,7 @@ RSpec.describe "Counting" do
   end
 
   after do
-    ActiveRecord::Base.silence { CreateModelsForTest.migrate(:down) }
+    CreateModelsForTest.migrate(:down)
   end
 
   let(:user) { User.create }
