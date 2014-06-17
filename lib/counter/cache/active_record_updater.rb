@@ -1,6 +1,6 @@
 module Counter
   module Cache
-    class Updater < Struct.new(:options)
+    class ActiveRecordUpdater < Struct.new(:options)
       def after_create(record)
         counter_for(record).update(:incr)
       end
