@@ -28,7 +28,10 @@ module Counter
       private
 
       def with_redis
-        Counter::Cache.configuration.redis_pool.with do |redis|
+        redis_pool = Counter::Cache.configuration.redis_pool
+        return yield redis_pool unless redis_pool.respond_to?(:with)
+
+        redis_pool.with do |redis|
           yield redis
         end
       end

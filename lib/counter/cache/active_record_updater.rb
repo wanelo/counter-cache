@@ -16,7 +16,7 @@ module Counter
       end
 
       def counter_class
-        options[:counter_class]
+        options[:counter_class] || Counter::Cache::Counters::BufferCounter
       end
     end
   end

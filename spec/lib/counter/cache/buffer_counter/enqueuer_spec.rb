@@ -42,12 +42,12 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Enqueuer do
                                                            method: "calculate_boo",
                                                            cache: false,
                                                            counter: "SuperCounter" })
-        enqueuer.enqueue!
+        enqueuer.enqueue!(double)
       end
     end
 
     it 'enqueues one job' do
-      enqueuer.enqueue!
+      enqueuer.enqueue!(double)
     end
   end
 end

@@ -21,7 +21,7 @@ module Counter
                          source_object.class.name,
                          relation_finder.relation_id,
                          relation_finder.relation_class,
-                         counter_class_name).enqueue!
+                         counter_class_name).enqueue!(source_object)
           end
 
           def relation_finder

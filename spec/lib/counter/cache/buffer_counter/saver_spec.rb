@@ -20,7 +20,7 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Saver do
       let(:counting_store) { double(get: 2) }
 
       before do
-        allow(options).to receive(:cache?).and_return(true)
+        allow(options).to receive(:cached?).and_return(true)
         expect(relation_object).to receive(:boo_count=).with(4)
         expect(relation_object).to receive(:save!)
         expect(counting_store).to receive(:del)
@@ -33,11 +33,11 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Saver do
       end
     end
 
-    describe 'when cache? is true' do
+    describe 'when cached? is true' do
       let(:counting_store) { double(get: 2) }
 
       before do
-        allow(options).to receive(:cache?).and_return(true)
+        allow(options).to receive(:cached?).and_return(true)
         expect(counting_store).to receive(:del)
       end
 
@@ -48,9 +48,9 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Saver do
       end
     end
 
-    describe 'when cache? is false' do
+    describe 'when cached? is false' do
       before do
-        allow(options).to receive(:cache?).and_return(false)
+        allow(options).to receive(:cached?).and_return(false)
       end
 
       describe 'when method is passed' do

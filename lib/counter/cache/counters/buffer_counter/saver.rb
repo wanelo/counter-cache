@@ -22,7 +22,7 @@ module Counter
           end
 
           def calculate_new_value
-            return current_column_value + counter_value.to_i if options.cache? && counter_value
+            return current_column_value + counter_value.to_i if options.cached? && counter_value
             non_cached_count.to_i
           end
 
