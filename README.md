@@ -182,7 +182,7 @@ Counter::Cache.configure do |c|
   c.default_worker_adapter = MyCustomWorkAdapter
   c.recalculation_delay    = 6.hours # Default delay for recalculations
   c.redis_pool             = Redis.new
-  c.counting_data_store    = MyCustomDataStore # Default is build in Redis
+  c.counting_data_store    = MyCustomDataStore # Default is Counter::Cache::Redis
 end
 ```
 
