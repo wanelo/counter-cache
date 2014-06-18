@@ -4,9 +4,13 @@
 
 Counting things is hard, counting them at scale is even harder, so control when things are counted.
 
-By default, a Buffer Counter which implements two modes of counting. The two modes are deffered and recalculation.
+By default, a Buffer Counter is used which implements two modes of counting. The two modes are deferred and recalculation.
 
-### Mode: Deferred (Initial mode used, is roughly realtime)
+IMPORTANT: If Sidekiq is to be used as the delayed job framework, using `sidekiq-unique-jobs` is essential: https://github.com/mhenrixon/sidekiq-unique-jobs
+
+### Mode: Deferred
+
+Initial mode that is used to provide roughly realtime counters.
 
 This mode is meant to provide very reasonably up to date counters using values buffered into Redis, without asking the database
 for the count at all. An example of how this works is described:
@@ -31,7 +35,9 @@ When a post is created:
   user.posts_count # 12
 ```
 
-### Mode: Recalculation (Runs later, ensures values is completely up to date)
+### Mode: Recalculation
+
+Runs later and ensures values are completely up to date.
 
 This mode is used to compensate for transient errors that may cause the deferred counters to drift from the actual
 values. The exact reasons this happens are undefined, redis could hang, go away, the universe could skip ahead in time,
@@ -80,6 +86,7 @@ Counter caches are configured on the models from the perspective of the child mo
 
 ### Basic Counter with recalculation:
 
+```ruby
 class Post
   include Counter::Cache
 
@@ -88,9 +95,11 @@ class Post
                    relation_class_name: "User",
                    method: :calculate_posts_count, # This is a method on the user.
 end
+```
 
 ### To control when recalculation happens:
 
+```ruby
 class Post
   include Counter::Cache
 
@@ -101,9 +110,11 @@ class Post
                    recalculation: true|false, # whether to ever recalculate this counter.
                    recalculation_delay: 10.seconds # Only a hard value that defines when to perform a full recalculation.
 end
+```
 
 ### To control when the deferred job runs:
 
+```ruby
 class Post
   include Counter::Cache
 
@@ -119,9 +130,11 @@ class Post
                    method: :calculate_posts_count, # This is a method on the user.
                    wait: ->(user) { user.posts_count * 10 } # .. or a proc, in this case, the more posts a user has, the less frequently it will be updated.
 end
+```
 
 ### To control if an update should even happen:
 
+```ruby
 class Post
   include Counter::Cache
 
@@ -131,12 +144,14 @@ class Post
                    method: :calculate_posts_count, # This is a method on the user.
                    if: ->(post) { post.public? ? false : true } # only update the user if this post is newer than a year.
 end
+```
 
 ### Polymorphism (because YAY)
 
 Setting `polymorphic: true`, will ask ActiveRecord what the class is (User, Store), based on followee_type, and update
 the appropriate model. So if a user is followed, then that users followers_count will increment.
 
+```ruby
 class User
   attr_accessible :followers_count
 end
@@ -154,6 +169,7 @@ class Follow
                    relation: :followee,
                    polymorphic: true
 end
+```
 
 ## Configuration
 
