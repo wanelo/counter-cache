@@ -4,6 +4,18 @@
 
 Counting things is hard, counting them at scale is even harder, so control when things are counted.
 
+[Rails Counter Caches](http://railscasts.com/episodes/23-counter-cache-column) are a convenient way to keep counters on
+models that have many children. Without them, you always do live counts, which do not scale. But at high scale, Rails
+counter caches create update contention on singe models, especially for social sites where any single model might become
+extremely popular. Many web requests trying to update the same row creates database deadlocks and kills performance due
+to locking and an uncontrollable increase in iops.
+
+This library provides all the benefits of rails counter cache, without the penalty of the contention on updates,
+by serializing, buffering, and delaying updates via a queue. Counts becoming slightly less realtime, but with a guarantee that
+single models will never be updated more than once in certain time periods.
+
+![Counter Cache Flow](doc/counter-cache-flow.png)
+
 By default, a Buffer Counter is used which implements two modes of counting. The two modes are deferred and recalculation.
 
 IMPORTANT: If Sidekiq is to be used as the delayed job framework, using `sidekiq-unique-jobs` is essential: https://github.com/mhenrixon/sidekiq-unique-jobs
