@@ -84,7 +84,7 @@ Or install it yourself as:
 
 Counter caches are configured on the models from the perspective of the child model to the parent that contains the counter.
 
-### Basic Counter with recalculation:
+#### Basic Counter with recalculation:
 
 ```ruby
 class Post
@@ -97,7 +97,7 @@ class Post
 end
 ```
 
-### To control when recalculation happens:
+#### To control when recalculation happens:
 
 ```ruby
 class Post
@@ -112,7 +112,7 @@ class Post
 end
 ```
 
-### To control when the deferred job runs:
+#### To control when the deferred job runs:
 
 ```ruby
 class Post
@@ -132,7 +132,7 @@ class Post
 end
 ```
 
-### To control if an update should even happen:
+#### To control if an update should even happen:
 
 ```ruby
 class Post
@@ -142,11 +142,11 @@ class Post
                    relation: :user,
                    relation_class_name: "User",
                    method: :calculate_posts_count, # This is a method on the user.
-                   if: ->(post) { post.public? ? false : true } # only update the user if this post is newer than a year.
+                   if: ->(post) { post.public? ? false : true }
 end
 ```
 
-### Polymorphism (because YAY)
+#### Polymorphism (because YAY)
 
 Setting `polymorphic: true`, will ask ActiveRecord what the class is (User, Store), based on followee_type, and update
 the appropriate model. So if a user is followed, then that users followers_count will increment.
@@ -164,6 +164,8 @@ class Follow
   attr_accessible :user_id, :followee_id, :followee_type
 
   belongs_to :followee, polymorphic: true
+
+  include Counter::Cache
 
   counter_cache_on column: :followers_count,
                    relation: :followee,
