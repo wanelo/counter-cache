@@ -1,14 +1,3 @@
-language: ruby
-rvm:
-  - 2.1.1
-  - 2.1.0
-  - 2.0.0
-  - 1.9.3
-gemfile:
-  - gemfiles/activerecord_3.gemfile
-  - gemfiles/activerecord_4.0.gemfile
-  - gemfiles/activerecord_4.1.gemfile
 notifications:
-  email:
-    on_success: never
-webhooks: "http://ci.wanelo.com/projects/2f4c3438-a0bc-434e-a9fb-30c0c335b432/status"
+  email: false
+  webhooks: "http://ci.wanelo.com/projects/d6108a07-a333-487a-97ed-0df78d8464c0/status"
