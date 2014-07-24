@@ -54,6 +54,22 @@ module Counter
         end
       end
 
+      def custom_options(source_object)
+        if options[:custom_options]
+          custom_options = {}
+          options[:custom_options].each do |option_name, option_value|
+            if option_value.respond_to?(:call)
+              custom_options[option_name] = option_value.call(source_object)
+            else
+              custom_options[option_name] = option_value
+            end
+          end
+          return custom_options
+        else
+          nil
+        end
+      end
+
       def recalculation_delay
         options[:recalculation_delay] || Counter::Cache.configuration.recalculation_delay
       end
