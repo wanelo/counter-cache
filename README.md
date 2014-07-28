@@ -259,3 +259,15 @@ This defaults to Counter::Cache::Redis but can be set to anything. The Redis sto
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+### Running specs:
+
+Appraisal is used to test against multiple versions of activerecord. 3.2, 4.0, and 4.1 are currently supported.
+
+To install dependencies:
+
+    $ bundle exec appraisal install
+
+To run specs across versions:
+
+    $ bundle exec appraisal rspec
