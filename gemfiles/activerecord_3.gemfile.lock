@@ -1,7 +1,7 @@
 PATH
   remote: ../
   specs:
-    counter-cache (0.0.1)
+    counter-cache (0.0.2)
       activerecord (>= 3.0)
 
 GEM
