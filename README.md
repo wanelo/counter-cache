@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/wanelo/counter-cache.svg?branch=master)](https://travis-ci.org/wanelo/counter-cache)
 
-Counting things is hard, counting them at scale is even harder, so control when things are counted.
+Counting things is hard, counting them at scale is even harder, so control when things are counted. 
 
 [Rails Counter Caches](http://railscasts.com/episodes/23-counter-cache-column) are a convenient way to keep counters on
 models that have many children. Without them, you always do live counts, which do not scale. But at high scale, Rails
