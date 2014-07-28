@@ -20,7 +20,7 @@ module Counter
           end
 
           def reflection_type
-            source_object.reflections[options.relation.to_sym].class_name.to_s.camelize # let AR give us the correct class name :)
+            source_object.class.reflections[options.relation.to_sym].class_name.to_s.camelize # let AR give us the correct class name :)
           end
         end
       end

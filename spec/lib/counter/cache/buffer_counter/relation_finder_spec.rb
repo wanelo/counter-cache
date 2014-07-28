@@ -29,7 +29,7 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::RelationFinder do
       before do
         reflection = double
         expect(reflection).to receive_message_chain("class_name.to_s.camelize") { "Boo" }
-        expect(source_object).to receive(:reflections).and_return({:boo => reflection})
+        expect(source_object.class).to receive(:reflections).and_return({:boo => reflection})
       end
 
       it 'asks active record for the class name' do
