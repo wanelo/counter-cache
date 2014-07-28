@@ -1,3 +1,10 @@
+rvm:
+  - "1.9.3"
+  - "2.1.1"
+gemfile:
+  - gemfiles/activerecord_3.gemfile
+  - gemfiles/activerecord_4.0.gemfile
+  - gemfiles/activerecord_4.1.gemfile
 notifications:
   email: false
   webhooks: "http://ci.wanelo.com/projects/d6108a07-a333-487a-97ed-0df78d8464c0/status"
