@@ -29,6 +29,10 @@ module Counter
         options[:method]
       end
 
+      def increment_by
+        options[:increment_by]
+      end
+
       def cached?
         option_or_true options[:cache]
       end

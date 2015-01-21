@@ -1,15 +1,15 @@
 module Counter
   module Cache
     class Redis
-      def incr(key)
+      def incr(key, val = 1)
         with_redis do |redis|
-          redis.incr key
+          redis.incrby key, val
         end
       end
 
-      def decr(key)
+      def decr(key, val = 1)
         with_redis do |redis|
-          redis.decr(key)
+          redis.decrby(key, val)
         end
       end
 

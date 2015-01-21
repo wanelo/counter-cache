@@ -12,6 +12,7 @@ class CreateModelsForTest < ActiveRecord::Migration
       t.integer :followers_count, :default => 0
       t.integer :users_i_follow_count, :default => 0
       t.integer :bogus_followed_count, :default => 0
+      t.integer :reviews_sum, :default => 0
     end
 
     create_table :follows do |t|
@@ -24,17 +25,24 @@ class CreateModelsForTest < ActiveRecord::Migration
       t.string :body
       t.belongs_to :user
     end
+
+    create_table :reviews do |t|
+      t.integer :score
+      t.belongs_to :user
+    end
   end
 
   def self.down
     drop_table(:users)
     drop_table(:posts)
     drop_table(:follows)
+    drop_table(:reviews)
   end
 end
 
 class User < ActiveRecord::Base
   has_many :posts
+  has_many :reviews
 
   def calculate_posts_count
     posts.count
@@ -84,4 +92,16 @@ class Post < ActiveRecord::Base
                    relation: :user,
                    relation_class_name: "User",
                    recalculation: false
+end
+
+class Review < ActiveRecord::Base
+  belongs_to :user
+
+  include Counter::Cache
+
+  counter_cache_on column: :reviews_sum,
+    relation: :user,
+    increment_by: ->(review) { review.score },
+    recalculation: false
+
 end

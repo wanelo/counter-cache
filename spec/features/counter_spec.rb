@@ -91,5 +91,12 @@ RSpec.describe "Counting" do
       expect(user.reload.bogus_followed_count).to eq(101)
     end
   end
+
+  describe '#reviews_sum' do
+    it 'increments the user review sum by the review score' do
+      Review.create(score: 4, user: user)
+      expect(user.reload.reviews_sum).to eq(4)
+    end
+  end
 end
 

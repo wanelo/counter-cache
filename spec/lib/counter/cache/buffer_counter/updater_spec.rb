@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Counter::Cache::Counters::BufferCounter::Updater do
-  let(:options) { double(relation: "boo", relation_class_name: "Boo", column: "boo", relation_id: nil) }
+  let(:options) { double(relation: "boo", relation_class_name: "Boo", column: "boo", relation_id: nil, increment_by: 1) }
   let(:source_object) { double(boo_id: 1) }
   let(:updater) { Counter::Cache::Counters::BufferCounter::Updater.new(source_object, options, "Hello") }
 

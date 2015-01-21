@@ -33,11 +33,16 @@ module Counter
           end
 
           def incr
-            redis.incr(key)
+            redis.incr(key, increment_by)
           end
 
           def decr
-            redis.decr(key)
+            redis.decr(key, increment_by)
+          end
+
+          def increment_by
+            return options.increment_by.call(source_object) if options.increment_by.is_a?(Proc)
+            1
           end
 
           def key

@@ -16,15 +16,25 @@ RSpec.describe Counter::Cache::Redis do
 
   describe '#decr' do
     it 'calls decr on redis with the key' do
-      expect(redis).to receive(:decr).with("hello")
+      expect(redis).to receive(:decrby).with("hello", 1)
       helper.decr("hello")
+    end
+
+    it 'calls decr on redis with the key and increment value' do
+      expect(redis).to receive(:decrby).with("hello", 2)
+      helper.decr("hello", 2)
     end
   end
 
   describe '#incr' do
     it 'calls incr on redis with the key' do
-      expect(redis).to receive(:incr).with("hello")
+      expect(redis).to receive(:incrby).with("hello", 1)
       helper.incr("hello")
+    end
+
+    it 'calls incr on redis with the key and increment value' do
+      expect(redis).to receive(:incrby).with("hello", 2)
+      helper.incr("hello", 2)
     end
   end
 
