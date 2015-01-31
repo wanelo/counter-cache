@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Counter::Cache::Counters::BufferCounter::Updater do
-  let(:options) { double(relation: "boo", relation_class_name: "Boo", column: "boo", relation_id: nil, increment_by: 1) }
+  let(:options) { double(relation: "boo", relation_class_name: "Boo", column: "boo", column_key_name: nil, relation_key_name: nil, relation_id: nil, increment_by: 1) }
   let(:source_object) { double(boo_id: 1) }
   let(:updater) { Counter::Cache::Counters::BufferCounter::Updater.new(source_object, options, "Hello") }
 
@@ -28,11 +28,11 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Updater do
   describe "#enqueue" do
     it 'constructs and calls enqueue! on the enqueue' do
       expect(Counter::Cache::Counters::BufferCounter::Enqueuer).to receive(:new).with(options,
-                                                                                      source_object.class.name,
-                                                                                      1,
-                                                                                      "Boo",
-                                                                                      "Hello")
-                                                                                .and_return(double(enqueue!: true))
+        source_object.class.name,
+        1,
+        "Boo",
+        "Hello")
+      .and_return(double(enqueue!: true))
       updater.send(:enqueue)
     end
   end

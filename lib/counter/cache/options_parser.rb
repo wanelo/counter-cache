@@ -13,8 +13,16 @@ module Counter
         options[:column]
       end
 
+      def column_key_name
+        options[:column_key_name]
+      end
+
       def relation
         options[:relation]
+      end
+
+      def relation_key_name
+        options[:relation_key_name]
       end
 
       def relation_class_name

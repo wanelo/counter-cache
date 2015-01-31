@@ -5,7 +5,7 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Saver do
   end
 
   let(:relation_object) { double(boo_count: 2) }
-  let(:options) { double(relation_class_name: "Boo", relation_id: 1, column: "boo_count", method: nil, source_object_class_name: Boo) }
+  let(:options) { double(relation_class_name: "Boo", relation_id: 1, column: "boo_count", column_key_name: nil, relation_key_name: nil, method: nil, source_object_class_name: Boo) }
   let(:saver) { Counter::Cache::Counters::BufferCounter::Saver.new(options) }
 
   describe '#save!' do
