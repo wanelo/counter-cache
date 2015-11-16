@@ -109,6 +109,20 @@ class Post
 end
 ```
 
+#### To increment dynamically:
+
+```ruby
+class Review
+  include Counter::Cache
+
+  counter_cache_on column: :reviews_sum,
+                   relation: :product,
+                   relation_class_name: "Product",
+                   increment_by: ->(review) { review.score },
+                   method: :recalculate_reviews_sum, # This is a method on the product.
+end
+```
+
 #### To control when recalculation happens:
 
 ```ruby
