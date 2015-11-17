@@ -1,7 +1,7 @@
 PATH
   remote: ../
   specs:
-    counter-cache (0.0.2)
+    counter-cache (0.1.0)
       activerecord (>= 3.0)
 
 GEM
@@ -95,3 +95,6 @@ DEPENDENCIES
   rake
   rspec (>= 3.0)
   sqlite3
+
+BUNDLED WITH
+   1.10.6
