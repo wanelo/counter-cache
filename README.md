@@ -96,7 +96,7 @@ Or install it yourself as:
 
 Counter caches are configured on the models from the perspective of the child model to the parent that contains the counter.
 
-#### Basic Counter with recalculation:
+#### Basic Counter with recalculation and custom options:
 
 ```ruby
 class Post
@@ -106,6 +106,7 @@ class Post
                    relation: :user,
                    relation_class_name: "User",
                    method: :calculate_posts_count, # This is a method on the user.
+                   custom_options: { email: ->(user) { user.email }, foo: "bar" } # custom_options hash available for further processing in Worker.
 end
 ```
 
