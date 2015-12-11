@@ -16,6 +16,7 @@ module Counter
                                            { relation_class_name: relation_class,
                                              relation_id: relation_id,
                                              column: options.column,
+                                             touch_column: options.touch_column,
                                              method: options.method,
                                              cache: cached,
                                              counter: counter_class_name })
