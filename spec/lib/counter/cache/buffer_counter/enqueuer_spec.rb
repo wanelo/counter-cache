@@ -5,6 +5,7 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Enqueuer do
   let(:options) { double(worker_adapter: worker_adapter,
                          wait: 10,
                          column: "boo",
+                         touch_column: "boo_updated_at",
                          method: "calculate_boo",
                          cached?: true,
                          recalculation?: false,
@@ -23,6 +24,7 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Enqueuer do
                                                        { relation_class_name: "Boo",
                                                          relation_id: 1,
                                                          column: "boo",
+                                                         touch_column: "boo_updated_at",
                                                          method: "calculate_boo",
                                                          cache: true,
                                                          counter: "SuperCounter" })
@@ -39,6 +41,7 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Enqueuer do
                                                          { relation_class_name: "Boo",
                                                            relation_id: 1,
                                                            column: "boo",
+                                                           touch_column: "boo_updated_at",
                                                            method: "calculate_boo",
                                                            cache: false,
                                                            counter: "SuperCounter" })
