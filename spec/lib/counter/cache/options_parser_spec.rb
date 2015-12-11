@@ -34,6 +34,13 @@ RSpec.describe Counter::Cache::OptionsParser do
     end
   end
 
+  describe "#touch_column" do
+    let(:options) { { touch_column: "touch_column_name" } }
+    it "returns option if set" do
+      expect(parser.touch_column).to eq("touch_column_name")
+    end
+  end
+
   describe "#method" do
     let(:options) { { method: "method" } }
     it "returns option if set" do

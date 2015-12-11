@@ -4,8 +4,8 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Saver do
   class Boo
   end
 
-  let(:relation_object) { double(boo_count: 2) }
-  let(:options) { double(relation_class_name: "Boo", relation_id: 1, column: "boo_count", method: nil, source_object_class_name: Boo) }
+  let(:relation_object) { double(boo_count: 2, boo_updated_at: DateTime.now) }
+  let(:options) { double(relation_class_name: "Boo", relation_id: 1, column: "boo_count", touch_column: "boo_updated_at", method: nil, source_object_class_name: Boo) }
   let(:saver) { Counter::Cache::Counters::BufferCounter::Saver.new(options) }
 
   describe '#save!' do
@@ -22,6 +22,7 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Saver do
       before do
         allow(options).to receive(:cached?).and_return(true)
         expect(relation_object).to receive(:boo_count=).with(4)
+        expect(relation_object).to receive(:boo_updated_at=).with(DateTime.now)
         expect(relation_object).to receive(:save!)
         expect(counting_store).to receive(:del)
       end
@@ -43,6 +44,7 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Saver do
 
       it 'saves the value' do
         expect(relation_object).to receive(:boo_count=).with(4)
+        expect(relation_object).to receive(:boo_updated_at=).with(DateTime.now)
         expect(relation_object).to receive(:save!)
         saver.save!
       end
@@ -61,6 +63,7 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Saver do
 
         it 'saves the value' do
           expect(relation_object).to receive(:boo_count=).with(4)
+          expect(relation_object).to receive(:boo_updated_at=).with(DateTime.now)
           expect(relation_object).to receive(:save!)
           saver.save!
         end
@@ -75,6 +78,7 @@ RSpec.describe Counter::Cache::Counters::BufferCounter::Saver do
 
         it 'saves the value' do
           expect(relation_object).to receive(:boo_count=).with(4)
+          expect(relation_object).to receive(:boo_updated_at=).with(DateTime.now)
           expect(relation_object).to receive(:save!)
           saver.save!
         end

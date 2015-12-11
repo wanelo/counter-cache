@@ -18,6 +18,7 @@ module Counter
 
           def save_new_value!(value)
             relation_object.send("#{options.column}=", value)
+            relation_object.send("#{options.touch_column}=", DateTime.now) if options.touch_column
             relation_object.save!(validate: false)
           end
 
