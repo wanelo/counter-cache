@@ -105,7 +105,21 @@ class Post
   counter_cache_on column: :posts_count, # users.posts_count
                    relation: :user,
                    relation_class_name: "User",
+                   method: :calculate_posts_count # This is a method on the user.
+end
+```
+
+#### To allow a timestamp to be updated:
+
+```ruby
+class Post
+  include Counter::Cache
+
+  counter_cache_on column: :posts_count, # users.posts_count
+                   relation: :user,
+                   relation_class_name: "User",
                    method: :calculate_posts_count, # This is a method on the user.
+                   touch_column: :posts_updated_at
 end
 ```
 
