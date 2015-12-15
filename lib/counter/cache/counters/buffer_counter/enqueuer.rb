@@ -11,14 +11,16 @@ module Counter
           private
 
           def create_and_enqueue(delay, cached)
+            parameters = { relation_class_name: relation_class,
+                           relation_id: relation_id,
+                           column: options.column,
+                           method: options.method,
+                           cache: cached,
+                           counter: counter_class_name }
+            parameters[:touch_column] = options.touch_column unless options.touch_column.nil?
             options.worker_adapter.enqueue(delay,
                                            source_object_class_name,
-                                           { relation_class_name: relation_class,
-                                             relation_id: relation_id,
-                                             column: options.column,
-                                             method: options.method,
-                                             cache: cached,
-                                             counter: counter_class_name })
+                                           parameters)
           end
         end
       end

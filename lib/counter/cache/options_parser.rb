@@ -13,6 +13,10 @@ module Counter
         options[:column]
       end
 
+      def touch_column
+        options[:touch_column]
+      end
+
       def relation
         options[:relation]
       end
