@@ -1,8 +1,22 @@
-# Counter::Cache
+# Counter::Cache 
 
+[![Gem Version](https://badge.fury.io/rb/counter-cache.png)](http://badge.fury.io/rb/ventable)
 [![Build Status](https://travis-ci.org/wanelo/counter-cache.svg?branch=master)](https://travis-ci.org/wanelo/counter-cache)
+[![Code Climate](https://codeclimate.com/github/wanelo/counter-cache.png)](https://codeclimate.com/github/wanelo/counter-cache)
 
 Counting things is hard, counting them at scale is even harder, so control when things are counted. 
+
+Any time your application performs pagination, the underlying library probably issues a `select count(*) from ...` 
+request to the database, because all paginators need to know how many pages there are. This works on a small-to-medium
+dataset, and in an application with relatively low web traffic. But at high traffic volume, live counts saturate CPU on the 
+database server. This is because sorting typically happens on CPU of the database server, using a small amount of heap 
+RAM or even worse &mdash; using temp files, which grinds the disk IO to a hault.  Web requests become slower and 
+slower, start to pile up in various queues, and eventually saturate all of the app servers.
+There you are, the site is down. 
+
+This gem provides a solution that works at scale, and will help you keep your site up.
+
+This library is battle-tested at Wanelo, where it has been running for several years.
 
 [Rails Counter Caches](http://railscasts.com/episodes/23-counter-cache-column) are a convenient way to keep counters on
 models that have many children. Without them, you always do live counts, which do not scale. But at high scale, Rails
