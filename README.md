@@ -1,7 +1,7 @@
 # Counter::Cache 
 
 [![Gem Version](https://badge.fury.io/rb/counter-cache.png)](http://badge.fury.io/rb/ventable)
-[![Build Status](https://travis-ci.org/wanelo/counter-cache.svg?branch=master)](https://travis-ci.org/wanelo/counter-cache)
+[![Build Status](https://travis-ci.org/wanelo/counter-cache.svg?branch=master&fl)](https://travis-ci.org/wanelo/counter-cache)
 [![Code Climate](https://codeclimate.com/github/wanelo/counter-cache.png)](https://codeclimate.com/github/wanelo/counter-cache)
 
 Counting things is hard, counting them at scale is even harder, so control when things are counted. 
