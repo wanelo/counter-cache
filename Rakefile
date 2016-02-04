@@ -1,6 +1,9 @@
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new(:spec)
+`bundle exec appraisal install`
 
-task :default => :spec
+task :default do
+  sh 'bundle exec appraisal rspec'
+end
+
