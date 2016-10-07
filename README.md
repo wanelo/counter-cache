@@ -22,7 +22,7 @@ This library is battle-tested at Wanelo, where it has been running for several y
 
 [Rails Counter Caches](http://railscasts.com/episodes/23-counter-cache-column) are a convenient way to keep counters on
 models that have many children. Without them, you always do live counts, which do not scale. But at high scale, Rails
-counter caches create update contention on singe models, especially for social sites where any single model might become
+counter caches create update contention on single models, especially for social sites where any single model might become
 extremely popular. Many web requests trying to update the same row creates database deadlocks and kills performance due
 to locking and an uncontrollable increase in iops.
 
