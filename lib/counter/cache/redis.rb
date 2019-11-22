@@ -28,7 +28,13 @@ module Counter
       private
 
       def with_redis
-        redis_pool = Counter::Cache.configuration.redis_pool
+        redis_pool =  if Counter::Cache.configuration.redis_pool.present?
+                        Counter::Cache.configuration.redis_pool
+                      elsif Counter::Cache.configuration.redis_url.present?
+                        Redis.new(url: Counter::Cache.configuration.redis_url)
+                      else
+                        Redis.new # redis in the same machine with app
+                      end
         return yield redis_pool unless redis_pool.respond_to?(:with)
 
         redis_pool.with do |redis|
