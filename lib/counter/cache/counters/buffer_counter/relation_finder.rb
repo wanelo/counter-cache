@@ -20,7 +20,14 @@ module Counter
           end
 
           def reflection_type
-            source_object.class.reflections[options.relation.to_sym].class_name.to_s.camelize # let AR give us the correct class name :)
+            reflection.class_name.to_s.camelize # let AR give us the correct class name :)
+          end
+
+          # Maintaining the compatibility between AR 4.2 that uses the reflection
+          # key as string and the previous versions that uses them as symbol.
+          def reflection
+            source_object.class.reflections[options.relation.to_sym] ||
+              source_object.class.reflections[options.relation.to_s]
           end
         end
       end
